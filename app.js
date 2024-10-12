@@ -19,7 +19,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: "http://localhost:3000", // Update with your frontend URL
+    origin: "https://news-fo5v.onrender.com", // Update with your frontend URL
     credentials: true // Allow credentials to be shared
 }));
 
@@ -126,7 +126,7 @@ passport.deserializeUser(function(user, cb) {   // Deserialize user for session 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:5000/auth/google/home",
+    callbackURL: "https://news-backend-sj97.onrender.com/auth/google/home",
     userProfileURL:"https://www.googleapis.com/oauth2/v3/userinfo"   //for deprecation warning
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -242,7 +242,7 @@ app.get("/auth/google/home",
     passport.authenticate("google", { failureRedirect: "/signin" }), 
     function(req, res) {
         // If authentication succeeded, we will reach here; redirect to the home page
-        res.redirect("http://localhost:3000/home"); 
+        res.redirect("https://news-fo5v.onrender.com/home"); 
      }
 );
 
