@@ -207,18 +207,16 @@ app
 
 app.get("/home", function (req, res) {
     if (req.isAuthenticated()) {
-        return res.status(200).json({ 
-            message: "User authenticated",
-            user: {
-                username: req.user.username,
-                id: req.user.id
-            }
-        });
-    } else {
-        return res.status(401).json({ error: "Not authenticated" });
+          
+        return res
+            .status(200)
+            .json({message: "Authenticated" }); //user containes the user information
+        } else {
+        return res
+            .status(401)
+            .json({error: "Not authenticated"});
     }
 });
-
 
 //Endpoint to get authenticated user profile 
 
