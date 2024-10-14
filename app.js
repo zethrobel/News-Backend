@@ -207,16 +207,18 @@ app
 
 app.get("/home", function (req, res) {
     if (req.isAuthenticated()) {
-          
-        return res
-            .status(200)
-            .json({message: "Authenticated" }); //user containes the user information
-        } else {
-        return res
-            .status(401)
-            .json({error: "Not authenticated"});
+        return res.status(200).json({ 
+            message: "User authenticated",
+            user: {
+                username: req.user.username,
+                id: req.user.id
+            }
+        });
+    } else {
+        return res.status(401).json({ error: "Not authenticated" });
     }
 });
+
 
 //Endpoint to get authenticated user profile 
 
@@ -307,13 +309,12 @@ app.post("/signin", function(req, res) {
             return res.status(401).json({ error: "Invalid credentials" }) // Invalid login
         }
         req.logIn(user, function(err) {
-          
             if (err) {
-                return res.status(500).json({ error: "Internal server error" }) // Handle server error
+                return res.status(500).json({ error: "Internal server error" });
             }
             return res.status(200).json({ message: "User logged in successfully", user })
-        })
-    })(req, res)
+        });
+    })(req, res);
 
 })
 
