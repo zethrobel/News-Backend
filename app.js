@@ -19,7 +19,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: "https://news-fo5v.onrender.com", // Update with your frontend URL
+    origin: "https://robel-news.onrender.com", // Update with your frontend URL
     credentials: true // Allow credentials to be shared
 }));
 
