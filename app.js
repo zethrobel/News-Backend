@@ -19,7 +19,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: "https://news-robel.vercel.app", // Update with your frontend URL
+    origin: ["https://news-robel.vercel.app"], // Update with your frontend URL
     credentials: true // Allow credentials to be shared
 }));
 
@@ -32,7 +32,10 @@ app.use(session({
     secret: process.env.MY_SECRET,
     resave: false,
     saveUninitialized: false,
-   
+    cookie: {
+        secure: process.env.NODE_ENV === 'production', // Use secure flag in production
+        maxAge: 30 * 60 * 1000 // Session expiry time
+    }
 }));
  
 
