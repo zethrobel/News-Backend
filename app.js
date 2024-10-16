@@ -1,4 +1,5 @@
 // Using Node modules installed using npm
+import createStore from './node_modules/create-store/dist/create-store.m';
 
 require('dotenv').config(); // Added semicolon
 const express = require("express");
@@ -7,6 +8,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const session = require("express-session");
 const passport = require("passport");
+const createStore= require("create-store")
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
