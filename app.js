@@ -35,7 +35,8 @@ app.use(session({
     cookie: { 
         secure: process.env.NODE_ENV === 'production', // Use secure flag in production
         maxAge: 30 * 60 * 1000 // Session expiry time
-    }
+    },
+    options
 }));
 
 const options = {
