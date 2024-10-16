@@ -1,5 +1,4 @@
 // Using Node modules installed using npm
-import createStore from './node_modules/create-store/dist/create-store.m';
 
 require('dotenv').config(); // Added semicolon
 const express = require("express");
@@ -8,7 +7,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const session = require("express-session");
 const passport = require("passport");
-const createStore= require("create-store")
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
@@ -16,22 +14,12 @@ const GitHubStrategy = require("passport-github2").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
 const _ = require("lodash");
 const NewsAPI = require("newsapi");
-const { applyMiddleware, compose } = require('redux'); // include these if necessary 
-const rootReducer = require('./path/to/your/rootReducer'); // adjust path accordingly
-const initialState = {}; // define your initial state
-
 const newsapi = new NewsAPI(process.env.API_KEY);
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // CORS configuration
 
-const store = createStore(rootReducer, initialState, compose(
-    applyMiddleware(...middleware),
-    window.REDUX_DEVTOOLS_EXTENSION
-        ? window.REDUX_DEVTOOLS_EXTENSION()
-        : f => f
-));
 
 app.use(cors({ 
     origin: ["https://news-robel.vercel.app"], // Update with your frontend URL
@@ -48,7 +36,6 @@ app.use(session({
     secret: process.env.MY_SECRET,
     saveUninitialized: false,
     expiration: 360,
-    store:store,
     resave: false,
     proxy: true,
     cookie: { 
