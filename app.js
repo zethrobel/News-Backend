@@ -37,6 +37,13 @@ app.use(session({
         maxAge: 30 * 60 * 1000 // Session expiry time
     }
 }));
+const options = {
+httpOnly: true ,
+secure: true,
+sameSite: 'none',
+domain: 'news-backend-sj97.onrender.com',
+
+}
  
 
 app.use(passport.initialize())        //passport
@@ -122,6 +129,8 @@ passport.deserializeUser(function(user, cb) {   // Deserialize user for session 
     return cb(null, user);
   });
 });
+
+
 
 
 //Google strategy
@@ -220,6 +229,7 @@ app.get("/home", function (req, res) {
             .json({error: "Not authenticated"});
     }
 });
+
 
 //Endpoint to get authenticated user profile 
 
