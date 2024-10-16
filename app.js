@@ -20,6 +20,13 @@ const PORT = process.env.PORT || 5000;
 
 // CORS configuration
 
+const store = createStore(rootReducer, initialState, compose(
+    applyMiddleware(...middleware),
+    window.REDUX_DEVTOOLS_EXTENSION
+        ? window.REDUX_DEVTOOLS_EXTENSION()
+        : f => f
+));
+
 app.use(cors({ 
     origin: ["https://news-robel.vercel.app"], // Update with your frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
@@ -35,7 +42,7 @@ app.use(session({
     secret: process.env.MY_SECRET,
     saveUninitialized: false,
     expiration: 360,
-    
+    store:store,
     resave: false,
     proxy: true,
     cookie: { 
