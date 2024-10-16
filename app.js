@@ -15,12 +15,16 @@ const findOrCreate = require("mongoose-findorcreate");
 const _ = require("lodash");
 const NewsAPI = require("newsapi");
 const newsapi = new NewsAPI(process.env.API_KEY);
+const cookieParser= require("cookie-parser")
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // CORS configuration
+app.use(cookieParser());
 app.use(cors({ 
     origin: ["https://news-robel.vercel.app"], // Update with your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization'], 
     credentials: true // Allow credentials to be shared
 }));
 
@@ -30,11 +34,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
     secret: process.env.MY_SECRET,
-    resave: false,
     saveUninitialized: false,
+    expiration: 360,
+    store: myStore,
+    resave: false,
+    proxy: true,
     cookie: { 
-        secure: process.env.NODE_ENV === 'production', // Use secure flag in production
-        maxAge: 30 * 60 * 1000 // Session expiry time
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none'
     }
 }));
 
@@ -174,6 +182,7 @@ app.route("/signup")
 
 // For Home page
 app.get("/home", function (req, res) {
+    
     if (req.isAuthenticated()) {
         return res.status(200).json({ message: "Authenticated" }); // User contains the user information
     } else {
