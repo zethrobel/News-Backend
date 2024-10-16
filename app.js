@@ -24,13 +24,6 @@ app.use(cors({
     credentials: true // Allow credentials to be shared
 }));
 
-const options = {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'none',
-    domain: 'news-backend-sj97.onrender.com',
-};
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,8 +35,7 @@ app.use(session({
     cookie: { 
         secure: process.env.NODE_ENV === 'production', // Use secure flag in production
         maxAge: 30 * 60 * 1000 // Session expiry time
-    },
-    options
+    }
 }));
 
 
