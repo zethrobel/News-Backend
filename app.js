@@ -35,7 +35,7 @@ app.use(session({
     secret: process.env.MY_SECRET,
     saveUninitialized: false,
     expiration: 360,
-    store: myStore,
+    
     resave: false,
     proxy: true,
     cookie: { 
