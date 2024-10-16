@@ -15,12 +15,11 @@ const findOrCreate = require("mongoose-findorcreate");
 const _ = require("lodash");
 const NewsAPI = require("newsapi");
 const newsapi = new NewsAPI(process.env.API_KEY);
-const cookieParser= require("cookie-parser")
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // CORS configuration
-app.use(cookieParser());
+
 app.use(cors({ 
     origin: ["https://news-robel.vercel.app"], // Update with your frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
