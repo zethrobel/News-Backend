@@ -24,6 +24,13 @@ app.use(cors({
     credentials: true // Allow credentials to be shared
 }));
 
+const options = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+    domain: 'news-backend-sj97.onrender.com',
+};
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,12 +46,7 @@ app.use(session({
     options
 }));
 
-const options = {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'none',
-    domain: 'news-backend-sj97.onrender.com',
-};
+
 
 app.use(passport.initialize());
 app.use(passport.session());
