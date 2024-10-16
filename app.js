@@ -16,6 +16,10 @@ const GitHubStrategy = require("passport-github2").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
 const _ = require("lodash");
 const NewsAPI = require("newsapi");
+const { applyMiddleware, compose } = require('redux'); // include these if necessary 
+const rootReducer = require('./path/to/your/rootReducer'); // adjust path accordingly
+const initialState = {}; // define your initial state
+
 const newsapi = new NewsAPI(process.env.API_KEY);
 const app = express();
 const PORT = process.env.PORT || 5000;
