@@ -204,14 +204,14 @@ app.get("/profile", function (req, res) {
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile"] }));
 app.get("/auth/google/home", passport.authenticate("google", { failureRedirect: "/signin" }), function(req, res) {
     // If authentication succeeded, we will reach here; redirect to the home page
-    res.redirect("https://news-fo5v.onrender.com/home");
+    res.redirect("https://news-robel.vercel.app/home");
 });
 
 // Facebook routes
 app.get("/auth/facebook", passport.authenticate("facebook"));
 app.get("/auth/facebook/home", passport.authenticate("facebook", { failureRedirect: "/signin" }), function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect("http://localhost:3000/home");
+    res.redirect("https://news-robel.vercel.app/home");
 });
 
 // GitHub routes
