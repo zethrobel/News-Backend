@@ -137,7 +137,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:5000/auth/facebook/home",
+    callbackURL: "https://news-backend-sj97.onrender.com/auth/facebook/home",
 }, function(accessToken, refreshToken, profile, cb) {
     console.log(profile.id, profile.displayName);
     NewsUser.findOrCreate({ facebookId: profile.id, username: profile.displayName }, function (err, user) {
@@ -149,7 +149,7 @@ passport.use(new FacebookStrategy({
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:5000/auth/github/home"
+    callbackURL: "https://news-backend-sj97.onrender.com/auth/github/home"
 }, function(accessToken, refreshToken, profile, done) {
     console.log(profile.id, profile.displayName);
     NewsUser.findOrCreate({ githubId: profile.id, username: profile.displayName }, function (err, user) {
@@ -218,7 +218,7 @@ app.get("/auth/facebook/home", passport.authenticate("facebook", { failureRedire
 app.get("/auth/github", passport.authenticate("github", { scope: [ "user:email" ] }));
 app.get("/auth/github/home", passport.authenticate("github", { failureRedirect: "/signin" }), function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect("http://localhost:3000/home");
+    res.redirect("https://news-robel.vercel.app/home");
 });
 
 // Log Out
@@ -227,7 +227,7 @@ app.get("/logout", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.redirect("http://localhost:3000");
+            res.redirect("https://news-robel.vercel.app");
         }
     });
 });
